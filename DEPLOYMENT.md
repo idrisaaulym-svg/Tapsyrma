@@ -20,7 +20,7 @@ ALTER TABLE student_answers DISABLE ROW LEVEL SECURITY;
 ```
 
 ### API деректерін алу:
-1. Supabase Dashboard → Settings → API
+1. Supabase Dashboard → Settings →
 2. Көшіріңіз:
    - `Project URL` → NEXT_PUBLIC_SUPABASE_URL
    - `anon public` key → NEXT_PUBLIC_SUPABASE_ANON_KEY

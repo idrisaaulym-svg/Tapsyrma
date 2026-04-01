@@ -14,6 +14,7 @@ export default function Home() {
   const [grade, setGrade] = useState(0)
   const [loading, setLoading] = useState(false)
   const [draggedAnswer, setDraggedAnswer] = useState<string | null>(null)
+  const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null)
 
   const handleAnswerChange = (questionId: number, answer: string) => {
     setStudentAnswers(prev => ({
@@ -34,6 +35,25 @@ export default function Home() {
     if (draggedAnswer) {
       handleAnswerChange(questionId, draggedAnswer)
       setDraggedAnswer(null)
+    }
+  }
+
+  // Touch events для мобильных устройств
+  const handleTouchStart = (answerId: string, e: React.TouchEvent) => {
+    const touch = e.touches[0]
+    setTouchStartPos({ x: touch.clientX, y: touch.clientY })
+    setDraggedAnswer(answerId)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault()
+  }
+
+  const handleTouchEnd = (questionId: number) => {
+    if (draggedAnswer) {
+      handleAnswerChange(questionId, draggedAnswer)
+      setDraggedAnswer(null)
+      setTouchStartPos(null)
     }
   }
 
@@ -163,6 +183,7 @@ export default function Home() {
               className="question-card"
               onDragOver={handleDragOver}
               onDrop={() => handleDrop(question.id)}
+              onTouchEnd={() => handleTouchEnd(question.id)}
             >
               <div className="question-term">{question.term}</div>
               <div className="drop-zone">
@@ -198,6 +219,8 @@ export default function Home() {
                 className={`answer-card ${isUsed ? 'used' : ''}`}
                 draggable={!isUsed}
                 onDragStart={() => handleDragStart(answer.id)}
+                onTouchStart={(e) => !isUsed && handleTouchStart(answer.id, e)}
+                onTouchMove={handleTouchMove}
               >
                 <span className="answer-id">{answer.id})</span>
                 <span className="answer-text">{answer.text}</span>

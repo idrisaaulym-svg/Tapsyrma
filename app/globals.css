@@ -152,6 +152,7 @@ body {
   padding: 10px;
   background: #ecf0f1;
   transition: all 0.3s;
+  touch-action: none;
 }
 
 .drop-zone:hover {
@@ -206,6 +207,10 @@ body {
   transition: all 0.3s;
   display: flex;
   gap: 10px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .answer-card:hover {
@@ -241,8 +246,231 @@ body {
 }
 
 @media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .header h1 {
+    font-size: 1.8rem;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .header-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .header p {
+    font-size: 0.9rem;
+  }
+
   .matching-container {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .questions-column,
+  .answers-column {
+    padding: 15px;
+  }
+
+  .questions-column h3,
+  .answers-column h3 {
+    font-size: 1.1rem;
+  }
+
+  .question-card {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .question-term {
+    font-size: 1rem;
+  }
+
+  .answer-card {
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+  }
+
+  .answer-id {
+    font-size: 1rem;
+    min-width: 22px;
+  }
+
+  .dropped-answer {
+    padding: 10px;
+    font-size: 0.85rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .remove-btn {
+    align-self: flex-end;
+  }
+
+  .empty-drop {
+    font-size: 0.85rem;
+    padding: 12px 8px;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .btn-secondary {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .btn-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .input-group label {
+    font-size: 1rem;
+  }
+
+  .input-group input {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+  }
+
+  .success-message {
+    padding: 16px;
+  }
+
+  .success-message h2 {
+    font-size: 1.3rem;
+  }
+
+  .success-message p {
+    font-size: 0.95rem;
+  }
+
+  .success-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .stat-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .stat-card p {
+    font-size: 0.85rem;
+  }
+
+  .filter-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .filter-section select {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .btn-danger {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .results-table {
+    font-size: 0.85rem;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 10px 8px;
+  }
+
+  .grade-badge {
+    padding: 4px 10px;
+    font-size: 0.85rem;
+  }
+
+  .nav-links {
+    margin-top: 20px;
+  }
+
+  .nav-links a {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .questions-column,
+  .answers-column {
+    padding: 12px;
+  }
+
+  .question-card {
+    padding: 10px;
+  }
+
+  .answer-card {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card h3 {
+    font-size: 1.8rem;
+  }
+
+  .results-table {
+    font-size: 0.75rem;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 8px 6px;
   }
 }
 
