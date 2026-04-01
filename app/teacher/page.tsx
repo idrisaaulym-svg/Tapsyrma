@@ -52,6 +52,39 @@ export default function TeacherPage() {
     setLoading(false)
   }
 
+  const handleClearAll = async () => {
+    const confirmed = confirm('Барлық жауаптарды өшіргіңіз келе ме? Бұл әрекетті қайтару мүмкін емес!')
+    
+    if (!confirmed) return
+
+    setLoading(true)
+
+    if (supabase) {
+      // Supabase-тен өшіру
+      const { error } = await supabase
+        .from('student_answers')
+        .delete()
+        .neq('id', 0) // Барлық жазбаларды өшіру
+
+      if (error) {
+        console.error('Қате:', error)
+        alert('Деректерді өшіру кезінде қате орын алды!')
+      } else {
+        alert('Барлық жауаптар сәтті өшірілді!')
+        setResults([])
+        setFilteredResults([])
+      }
+    } else {
+      // localStorage-тен өшіру
+      localStorage.removeItem('studentResults')
+      alert('Барлық жауаптар сәтті өшірілді!')
+      setResults([])
+      setFilteredResults([])
+    }
+
+    setLoading(false)
+  }
+
   const stats = {
     total: results.length,
     grade5: results.filter(r => r.grade === 5).length,
@@ -101,6 +134,20 @@ export default function TeacherPage() {
           <option value="4">Баға: 4</option>
           <option value="3">Баға: 3</option>
         </select>
+        
+        <button 
+          className="btn btn-danger"
+          onClick={handleClearAll}
+          disabled={loading || results.length === 0}
+        >
+          <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            <line x1="10" y1="11" x2="10" y2="17"></line>
+            <line x1="14" y1="11" x2="14" y2="17"></line>
+          </svg>
+          Барлығын тазалау
+        </button>
       </div>
 
       {loading ? (
